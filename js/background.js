@@ -15,12 +15,12 @@ class Background {
 
     draw(){
         this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
-        this.ctx.drawImage(this.image, (this.posX + this.width), this.posY, this.width, this.height)//Esta segunda imágen es para que aparezca a continuación de la otra y haga el efecto de movimiento continuo.
+        this.ctx.drawImage(this.image, this.posX, (this.posY + this.height),this.width, this.height)//Esta segunda imágen es para que aparezca a continuación de la otra y haga el efecto de movimiento continuo.
     }
 
     move() {
-        this.posX -= this.vx
+        this.posY -= this.vx
 
-        if(this.posX <= -this.width) this.posX = 0;
+        if(this.posY <= -this.height) this.posY = 0;
     }
 }

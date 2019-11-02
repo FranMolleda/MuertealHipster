@@ -26,7 +26,7 @@ const Game = {
     start: function(){
         this.reset()
       this.interval = setInterval(() => {
-      //     this.framesCounter++;
+         this.framesCounter++;
 
         this.clear();
         this.drawAll();
@@ -42,7 +42,7 @@ const Game = {
 
     reset: function(){
         this.background = new Background(this.ctx, this.width, this.height);
-        //this.player = new Player(this.ctx, 50, 150, 'img/player.png', this.width,this.height, this.playerKeys);
+        this.player = new Player(this.ctx, 50, 150, '../img/player.png', this.width,this.height, this.playerKeys);
         //this.obstacles = [];
         //ScoreBoard.init(this.ctx, this.score)
     },
@@ -53,16 +53,20 @@ const Game = {
 
     drawAll: function(){
         this.background.draw();
-        //this.player.draw(this.framesCounter);
+        this.player.draw(this.framesCounter);
         //this.obstacles.forEach(obstacle => obstacle.draw())
         //ScoreBoard.draw(this.score)
     },
 
     moveAll: function(){
         this.background.move()
-        //this.player.move()
+        this.player.move()
         //this.obstacles.forEach(obstacle => obstacle.move())
     },
+
+    generateObstacles: function() {
+        this.obstacles.push(new Obstacle(this.ctx, 15, 45, this.width, this.height))
+      },
 
     gameOver: function() {
 
