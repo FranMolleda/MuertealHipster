@@ -3,25 +3,24 @@ class Player {
         this.ctx = ctx;
         this.width = width;
         this.height = height;
-
+    
         this.image = new Image();
         this.image.src = image;
-
-        this.posX = 100 - this.width//50;
-        this.posY = gameHeight - this.height;//200;
-        this.posY0 = gameHeight/2  - this.height;
+    
+        this.posX = 50;
+        this.posY = gameHeight * 0.94 - this.height ;
+        this.posY0 = gameHeight * 0.94 - this.height ;
         this.vy = 1;
-        this.gravity = 0.3;
+        this.gravity = 0.4;
         this.gameWidth = gameWidth;
-
+    
         this.frames = 3;
         this.framesIndex = 0;
-
+    
         this.keys = keys;
         this.bullets = [];
-        this.setListeners() //escucha las teclas que estas pulsando
-
-    }
+        this.setListeners()
+      }
 
     draw(framesCounter) {
         this.ctx.drawImage(
