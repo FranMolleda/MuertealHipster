@@ -7,11 +7,11 @@ class Player {
         this.image = new Image();
         this.image.src = image;
 
-        this.posX = 50;
-        this.posY = gameHeight * 0.98 - this.height;
-        this.posY0 = gameHeight * 0.98 - this.height;
+        this.posX = 100 - this.width//50;
+        this.posY = gameHeight - this.height;//200;
+        this.posY0 = gameHeight/2  - this.height;
         this.vy = 1;
-        this.gravity = 0.4;
+        this.gravity = 0.3;
         this.gameWidth = gameWidth;
 
         this.frames = 3;
@@ -28,16 +28,16 @@ class Player {
             this.image,
             this.framesIndex * Math.floor(this.image.width / this.frames),
             0,
-            Math.floor(this.image.width / this.frames),
+            Math.floor(this.image.width),
             this.image.height,
             this.posX,
             this.posY,
-            this.width,
+            this.width*4,
             this.height
         )
         //  console.log(this.bullets.length)
-        //  this.clearBullets()
-        //  this.bullets.forEach(bullet => bullet.draw())
+         this.clearBullets()
+        this.bullets.forEach(bullet => bullet.draw())
         //  this.animate(framesCounter)
     }
 
@@ -50,7 +50,7 @@ class Player {
             this.vy = 1;
             this.posY = this.posY0;
         }
-        //this.bullets.forEach(bullet => bullet.move())
+        this.bullets.forEach(bullet => bullet.move())
     }
 
 
@@ -64,24 +64,24 @@ class Player {
 
     setListeners() {
         document.addEventListener('keydown', (e) => {
-            //    switch(e.keyCode) {
-            //      case this.keys.TOP_KEY:
-            //        if(this.posY >= this.posY0) {
-            //          this.posY -= this.vy;
-            //          this.vy -= 10;
-            //        }
-            //        break;
-            //      case this.keys.SPACE:
-            //        this.shoot()
-            //    }
+            switch(e.keyCode) {
+              case this.keys.TOP_KEY:
+                if(this.posY >= this.posY) {
+                  this.posY -= this.posY;
+                  this.vy -= 10;
+                }
+                break;
+              case this.keys.SPACE:
+                this.shoot()
+            }
         })
     }
 
     shoot() {
-        //  this.bullets.push(new Bullet(this.ctx, 10, this.posX, this.posY, this.width, this.height, this.posY0))
+        this.bullets.push(new Bullet(this.ctx, 10, this.posX, this.posY, this.width, this.height, this.posY0))
     }
 
     clearBullets() {
-        // this.bullets = this.bullets.filter(bullet => bullet.posX <= this.gameWidth)
+    this.bullets = this.bullets.filter(bullet => bullet.posX <= this.gameWidth)
     }
 }

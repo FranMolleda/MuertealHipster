@@ -42,7 +42,9 @@ const Game = {
 
     reset: function(){
         this.background = new Background(this.ctx, this.width, this.height);
-        this.player = new Player(this.ctx, 50, 150, '../img/player.png', this.width,this.height, this.playerKeys);
+        //this.background2 = new Background2(this.ctx, this.width/2, this.height);
+
+        this.player = new Player(this.ctx, 50, 150, '../img/hipster2.png', this.width,this.height, this.playerKeys);
         //this.obstacles = [];
         //ScoreBoard.init(this.ctx, this.score)
     },
@@ -53,6 +55,7 @@ const Game = {
 
     drawAll: function(){
         this.background.draw();
+        //this.background2.draw()
         this.player.draw(this.framesCounter);
         //this.obstacles.forEach(obstacle => obstacle.draw())
         //ScoreBoard.draw(this.score)
@@ -60,12 +63,13 @@ const Game = {
 
     moveAll: function(){
         this.background.move()
+        //this.background2.move()
         this.player.move()
         //this.obstacles.forEach(obstacle => obstacle.move())
     },
 
     generateObstacles: function() {
-        this.obstacles.push(new Obstacle(this.ctx, 15, 45, this.width, this.height))
+        //this.obstacles.push(new Obstacle(this.ctx, 15, 45, this.width, this.height))
       },
 
     gameOver: function() {
