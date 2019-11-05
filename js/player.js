@@ -10,15 +10,20 @@ class Player {
         this.posX = 50;
         this.posY = gameHeight * 0.94 - this.height;
         this.posY0 = gameHeight * 0.94 - this.height;
-        this.vy = 1;
+        this.vy = 3;
         this.gravity = 0.4;
         this.gameWidth = gameWidth;
 
         this.frames = 3;
         this.framesIndex = 0;
+        this.speed=8
 
         this.keys = keys;
         this.bullets = [];
+        this.keyState = {
+            keyDown : false,
+            keyUp : false
+          }
         this.setListeners()
     }
 
@@ -40,15 +45,18 @@ class Player {
 
 
     move() {
-        if (this.posY <= this.posY0) {
-            this.posY += this.vy;
-            this.vy += this.gravity;
-        } else {
-            this.vy = 1;
-            this.posY = this.posY0;
+        if(this.keyState.keyUp && this.posY > 0){
+            this.posY -= this.speed
+            
+
+          }
+          if(this.keyState.keyDown && this.posY < this.posY0){ //PosY0 es la posición del player encima de la tabla
+        
+            this.posY += this.speed
+          }
         }
-        this.bullets.forEach(bullet => bullet.move())
-    }
+        //this.bullets.forEach(bullet => bullet.move())
+    
 
 
     animate(framesCounter) {
@@ -61,34 +69,23 @@ class Player {
 
     setListeners() {
         document.addEventListener('keydown', (e) => {
-            switch (e.keyCode) {
-                case this.keys.TOP_KEY:
-                    this.posY -= this.posY;
-                    //if (this.posY >= this.posY) {
-                    //    this.posY -= this.vy;
-                    //    this.vy -= 10;
-                    //}
-                    break;
-
-                case this.keys.RIGHT_KEY:
-                    this.posX += this.posX;
-                    break;
-
-                case this.keys.LEFT_KEY:
-                    this.posX -= this.posX;
-                    break;
-
-                case this.keys.DOWN_KEY:
-                    this.posY += posY;
-                    break;
-
-
-                case this.keys.SPACE:
-                    this.shoot()
-                    break;
-
+            e.preventDefault();
+            if (e.keyCode === 38) {
+                this.keyState.keyUp = true;
             }
-        })
+            if (e.keyCode === 40) {
+                this.keyState.keyDown = true;
+            }
+          })
+          document.addEventListener('keyup', (e) => {
+            e.preventDefault();
+            if (e.keyCode === 38) {
+                this.keyState.keyUp = false;
+            }
+            if (e.keyCode === 40) {
+                this.keyState.keyDown = false;
+            }
+          })
     }
 
     shoot() {
@@ -99,3 +96,4 @@ class Player {
         this.bullets = this.bullets.filter(bullet => bullet.posX <= this.gameWidth)
     }
 }
+

@@ -14,7 +14,7 @@ const Game = {
     },
     score: 0,
     //Briks config
-    numberOfBricks: 2,
+    numberOfBricks: 3,
     randomX: 0,
     randomH: 0,
     maxBricksY: 0,
@@ -91,7 +91,7 @@ const Game = {
             this.randomX = Math.floor(Math.random()*spaceX)+this.minBricksX + spaceX * i
             this.randomY = Math.floor(Math.random()*spaceY)+this.minBricksY + spaceY * i
             
-            this.bricks.push(new Brick(this.ctx, this.brickWidth, this.height * 0.94, this.randomX, -this.randomY/2))
+            this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY/2, this.randomX, this.height * 0.94 ))
         }
         console.log(this.bricks)
     },

@@ -1,5 +1,5 @@
 class Brick{
-    constructor (ctx, width, posY, posX, gameHeight){
+    constructor (ctx, width, gameHeight, posX, posY){
         this.ctx = ctx;
         this.width = width;
         this.height = gameHeight;
