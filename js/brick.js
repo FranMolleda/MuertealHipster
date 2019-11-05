@@ -1,16 +1,15 @@
 class Brick{
-    constructor (ctx, width,height, gameWidth, gameHeight){
+    constructor (ctx, width, posY, posX, gameHeight){
         this.ctx = ctx;
         this.width = width;
-        this.height = height;
+        this.height = gameHeight;
 
-        this.posX = gameWidth-100;
-        this.posY = gameHeight - this.height;
-        console.log()
+        this.posX = posX;
+        this.posY = posY
     }
 
     draw(){
-        this.ctx.fillStyle = 'rgb(134,196, 152)';
+        this.ctx.fillStyle = '#7C4943';
         this.ctx.fillRect(this.posX, this.posY, this.width, this.height)
     }
 }
