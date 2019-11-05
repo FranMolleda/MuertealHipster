@@ -42,20 +42,22 @@ const Game = {
             this.clear();
             this.drawAll();
             this.moveAll();
-            //this.clearBricks();
-            // if(this.framesCounter % 70 === 0) this.generateObstacles()
+            this.clearObstacles()
+             if(this.framesCounter % 70 === 0) this.generateObstacles()
             // if(this.framesCounter % 100 === 0) this.score++;
             // if(this.isCollision()) this.gameOver()
-            // if(this.framesCounter > 1000) this.framesCounter = 0;
+            if(this.framesCounter > 1000) this.framesCounter = 0;
         }, 1000 / this.fps)
     },
 
+    
+
     reset: function () {
         this.background = new Background(this.ctx, this.width, this.height);
-        //this.background2 = new Background2(this.ctx, this.width/2, this.height);
+        this.background2 = new Background2(this.ctx, this.width, this.height);
         this.bricks = [];
-        this.player = new Player(this.ctx, 50, 150, './img/hipster2.png', this.width, this.height, this.playerKeys);
-        //this.obstacles = [];
+        this.player = new Player(this.ctx, 80, 200, './img/hipster2.png', this.width, this.height, this.playerKeys);
+        this.obstacles = [];
         //ScoreBoard.init(this.ctx, this.score)
         this.maxBricksY = this.height * .80 //a mayor valor, mas bajo
         this.minBricksY = this.maxBricksY - this.height * 0.25
@@ -71,17 +73,18 @@ const Game = {
 
     drawAll: function () {
         this.background.draw();
-        //this.background2.draw()
+        this.background2.draw()
         this.player.draw(this.framesCounter);
         this.bricks.forEach(brick => brick.draw())
+        this.obstacles.forEach(obstacle => obstacle.draw())
         //ScoreBoard.draw(this.score)
     },
 
     moveAll: function () {
         this.background.move()
-        //this.background2.move()
+        this.background2.move()
         this.player.move()
-        //this.obstacles.forEach(obstacle => obstacle.move())
+        this.obstacles.forEach(obstacle => obstacle.move())
     },
 
     generateBricks: function () {
@@ -93,8 +96,11 @@ const Game = {
             
             this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY/2, this.randomX, this.height * 0.94 ))
         }
-        console.log(this.bricks)
     },
+
+    generateObstacles: function() {
+        this.obstacles.push(new Obstacle(this.ctx,'./img/barba.jpg', 20, 20, this.width, this.height))
+      },
 
 
     gameOver: function () {
@@ -102,10 +108,15 @@ const Game = {
     },
 
     isCollision: function () {
+        return this.obstacles.some(obs => (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ))
 
     },
 
     clearBricks: function () {
         //this.bricks = this.bricks.filter(element => (element.posX = 0))
-    }
+    },
+    clearObstacles: function() {
+        this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= 0))
+      }
+
 }

@@ -10,13 +10,14 @@ class Player {
         this.posX = 50;
         this.posY = gameHeight * 0.94 - this.height;
         this.posY0 = gameHeight * 0.94 - this.height;
-        this.vy = 3;
+        this.vy = 1;
         this.gravity = 0.4;
         this.gameWidth = gameWidth;
 
         this.frames = 3;
         this.framesIndex = 0;
-        this.speed=8
+
+        this.speed=3
 
         this.keys = keys;
         this.bullets = [];
@@ -36,11 +37,13 @@ class Player {
             this.image.height,
             this.posX,
             this.posY,
-            this.width * 4,
+            this.width,
             this.height
+
         )
         this.clearBullets()
         this.bullets.forEach(bullet => bullet.draw())
+        //this.animate(framesCounter)
     }
 
 
@@ -59,13 +62,13 @@ class Player {
     
 
 
-    animate(framesCounter) {
-        if (framesCounter % 10 === 0) {
-            this.framesIndex++;
-
-            if (this.framesIndex > 2) this.framesIndex = 0;
-        }
-    }
+   // animate(framesCounter) {
+   //     if (framesCounter % 10 === 0) {
+   //         this.framesIndex++;
+//
+   //         if (this.framesIndex > 2) this.framesIndex = 0;
+   //     }
+   // }
 
     setListeners() {
         document.addEventListener('keydown', (e) => {

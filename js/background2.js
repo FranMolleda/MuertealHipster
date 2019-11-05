@@ -5,7 +5,7 @@ class Background2 {
         this.height = height;
 
         this.image = new Image();
-        this.image.src = '../img/stairs.png';//ventana
+        this.image.src = './img/Stairss.png';//ventana
 
         this.posX = 0;
         this.posY = 0;
@@ -14,14 +14,16 @@ class Background2 {
     }
 
     draw(){
-        this.ctx.drawImage(this.image, 100, this.posY, 80, 160);
-        this.ctx.drawImage(this.image, 100, (this.posY - this.height),80, 160)//Esta segunda imágen es para que aparezca a continuación de la otra y haga el efecto de movimiento continuo.
+        this.ctx.drawImage(this.image, 40, this.posY , 80,440 );
+        this.ctx.drawImage(this.image, 40, (this.posY + 350),80, 360)//Esta segunda imágen es para que aparezca a continuación de la otra y haga el efecto de movimiento continuo.
+
+        //this.ctx.drawImage(this.image, 100, (this.posY - this.height),80, 160)//Esta segunda imágen es para que aparezca a continuación de la otra y haga el efecto de movimiento continuo.
     }
 
     move() {
-       this.posY += this.vx
+       //this.posY += this.vx
 
-       if(this.posY >=  this.height) this.posY = 0;
+       //if(this.posY >=  this.height) this.posY = 0;
        //this.posX -= this.vx;
 
        //if(this.posX <= -this.width) this.posX = 0;
