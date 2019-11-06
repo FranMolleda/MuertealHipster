@@ -14,7 +14,7 @@ const Game = {
     },
     score: 0,
     //Briks config
-    numberOfBricks: 2,
+    numberOfBricks: 3,
     randomX: 0,
     randomH: 0,
     maxBricksY: 0,
@@ -44,8 +44,8 @@ const Game = {
             this.moveAll();
             this.clearObstacles()
              if(this.framesCounter % 70 === 0) this.generateObstacles()
-            // if(this.framesCounter % 100 === 0) this.score++;
-            // if(this.isCollision()) this.gameOver()
+            if(this.framesCounter % 100 === 0) this.score++;
+            if(this.isCollision()) this.gameOver()
             if(this.framesCounter > 1000) this.framesCounter = 0;
         }, 1000 / this.fps)
     },
@@ -56,8 +56,9 @@ const Game = {
         this.background = new Background(this.ctx, this.width, this.height);
         this.background2 = new Background2(this.ctx, this.width, this.height);
         this.bricks = [];
-        this.player = new Player(this.ctx, 80, 200, './img/hipster2.png', this.width, this.height, this.playerKeys);
+        this.player = new Player(this.ctx, 80, 200, './img/elevator_withfulano.png', this.width, this.height, this.playerKeys);
         this.obstacles = [];
+        this.victims = []
         //ScoreBoard.init(this.ctx, this.score)
         this.maxBricksY = this.height * .80 //a mayor valor, mas bajo
         this.minBricksY = this.maxBricksY - this.height * 0.25
@@ -67,7 +68,6 @@ const Game = {
     },
 
     clear: function () {
-
         this.ctx.clearRect(0, 0, this.width, this.height)
     },
 
@@ -76,7 +76,7 @@ const Game = {
         this.background2.draw()
         this.player.draw(this.framesCounter);
         this.bricks.forEach(brick => brick.draw())
-        this.obstacles.forEach(obstacle => obstacle.draw())
+        this.obstacles.forEach(obstacle => obstacle.draw( this.framesCounter))
         //ScoreBoard.draw(this.score)
     },
 
@@ -92,29 +92,28 @@ const Game = {
         let spaceY = (this.maxBricksY - this.minBricksY) / this.numberOfBricks
         for (let i = 0; i < this.numberOfBricks; i++) {
             this.randomX = Math.floor(Math.random()*spaceX)+this.minBricksX + spaceX * i
-            this.randomY = Math.floor(((Math.random()*450)+50))+this.minBricksY + spaceY * i
+            this.randomY = Math.floor(((Math.random()*450)+500))+this.minBricksY + spaceY * i
+            this.heightY = Math.floor((Math.random()*450)+500) - (this.height/3)-100 +  spaceY * i
             
-            this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY/3, this.randomX, this.height * 0.94))
+            this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY, this.randomX-100, this.heightY))
         }
     },
 
     generateObstacles: function() {
-        this.obstacles.push(new Obstacle(this.ctx,'./img/franelmalo_solo.png', 60, 60, this.width, this.height))
+        this.obstacles.push(new Obstacle(this.ctx,'./img/franelmalo_sprite.png', 60, 60, this.width, this.height))
       },
 
 
     gameOver: function () {
-
+        clearInterval(this.interval)
     },
 
     isCollision: function () {
-        return this.obstacles.some(obs => (this.player.posX + this.player.width > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ))
+        return this.obstacles.some(obs => (this.player.posX + this.player.width/3 > obs.posX && obs.posX + obs.width > this.player.posX && this.player.posY + this.player.height > obs.posY && obs.posY + obs.height > this.player.posY ))
 
     },
 
-    clearBricks: function () {
-        //this.bricks = this.bricks.filter(element => (element.posX = 0))
-    },
+
     clearObstacles: function() {
         this.obstacles = this.obstacles.filter(obstacle => (obstacle.posX >= 0))
       }

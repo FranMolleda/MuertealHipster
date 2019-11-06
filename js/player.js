@@ -10,20 +10,20 @@ class Player {
         this.posX = 50;
         this.posY = gameHeight * 0.94 - this.height;
         this.posY0 = gameHeight * 0.94 - this.height;
-        this.vy = 1;
-        this.gravity = 0.4;
+        this.vy = 50;
+        this.gravity = .2;
         this.gameWidth = gameWidth;
 
-        this.frames = 3;
+        this.frames = 10;
         this.framesIndex = 0;
 
-        this.speed=3
+        this.speed=15
 
-        this.keys = keys;
         this.bullets = [];
         this.keyState = {
             keyDown : false,
-            keyUp : false
+            keyUp : false,
+            keySpace: false
           }
         this.setListeners()
     }
@@ -43,6 +43,7 @@ class Player {
         )
         this.clearBullets()
         this.bullets.forEach(bullet => bullet.draw())
+       
         //this.animate(framesCounter)
     }
 
@@ -56,20 +57,24 @@ class Player {
           if(this.keyState.keyDown && this.posY < this.posY0){ //PosY0 es la posición del player encima de la tabla
         
             this.posY += this.speed
+
+          }if(this.keyState.keySpace){
+            this.shoot();
+            
           }
-        }
-        //this.bullets.forEach(bullet => bullet.move())
-    
+                  this.bullets.forEach(bullet => bullet.move())
+
+    }
 
 
-   // animate(framesCounter) {
-   //     if (framesCounter % 10 === 0) {
-   //         this.framesIndex++;
-//
-   //         if (this.framesIndex > 2) this.framesIndex = 0;
-   //     }
-   // }
 
+ animate(framesCounter) {
+     if (framesCounter % 10 === 0) {
+         this.framesIndex++;
+
+         if (this.framesIndex > 2) this.framesIndex = 0;
+     }
+ }
     setListeners() {
         document.addEventListener('keydown', (e) => {
             e.preventDefault();
@@ -78,6 +83,9 @@ class Player {
             }
             if (e.keyCode === 40) {
                 this.keyState.keyDown = true;
+            }
+            if(e.keyCode === 32){
+                this.keyState.keySpace = true;
             }
           })
           document.addEventListener('keyup', (e) => {
@@ -88,8 +96,11 @@ class Player {
             if (e.keyCode === 40) {
                 this.keyState.keyDown = false;
             }
+            if(e.keyCode === 32){
+                this.keyState.keySpace = false;
+            }
           })
-    }
+        }
 
     shoot() {
         this.bullets.push(new Bullet(this.ctx, 10, this.posX, this.posY, this.width, this.height, this.posY0))
@@ -99,4 +110,6 @@ class Player {
         this.bullets = this.bullets.filter(bullet => bullet.posX <= this.gameWidth)
     }
 }
+
+
 

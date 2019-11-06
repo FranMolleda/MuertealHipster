@@ -9,7 +9,7 @@ class Brick{
     }
 
     draw(){
-        this.ctx.fillStyle = '#3B4033';
-        this.ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        this.ctx.fillStyle = 'black';
+        this.ctx.fillRect(this.posX, this.posY, 100, 30)
     }
 }

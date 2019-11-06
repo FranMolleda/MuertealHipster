@@ -8,14 +8,14 @@ class Bullet {
       this.playerHeight= playerHeight;
       this.floor = floor;
   
-      this.vx = 10;
-      this.vy = 1;
+      this.vx = 15;
+      this.vy = 9;
       this.gravity = 0.9;
     }
   
     draw() {
       this.ctx.beginPath();
-      this.ctx.fillStyle = 'red'
+      this.ctx.fillStyle = '#FFB832'
       this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2)
       this.ctx.fill()
       this.ctx.closePath();
