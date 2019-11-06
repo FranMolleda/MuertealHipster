@@ -14,7 +14,7 @@ const Game = {
     },
     score: 0,
     //Briks config
-    numberOfBricks: 3,
+    numberOfBricks: 2,
     randomX: 0,
     randomH: 0,
     maxBricksY: 0,
@@ -92,14 +92,14 @@ const Game = {
         let spaceY = (this.maxBricksY - this.minBricksY) / this.numberOfBricks
         for (let i = 0; i < this.numberOfBricks; i++) {
             this.randomX = Math.floor(Math.random()*spaceX)+this.minBricksX + spaceX * i
-            this.randomY = Math.floor(Math.random()*spaceY)+this.minBricksY + spaceY * i
+            this.randomY = Math.floor(((Math.random()*450)+50))+this.minBricksY + spaceY * i
             
-            this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY/2, this.randomX, this.height * 0.94 ))
+            this.bricks.push(new Brick(this.ctx, this.brickWidth, -this.randomY/3, this.randomX, this.height * 0.94))
         }
     },
 
     generateObstacles: function() {
-        this.obstacles.push(new Obstacle(this.ctx,'./img/barba.jpg', 20, 20, this.width, this.height))
+        this.obstacles.push(new Obstacle(this.ctx,'./img/franelmalo_solo.png', 60, 60, this.width, this.height))
       },
 
 

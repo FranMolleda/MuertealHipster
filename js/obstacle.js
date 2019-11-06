@@ -10,12 +10,17 @@ class Obstacle {
       this.posY = Math.floor(Math.random()*820)+ 100
 
   
-      this.vx = 10;
+      this.vx = 6;
     }
   
     draw() {
-      this.ctx.fillStyle = 'black';
-      this.ctx.fillRect(this.posX, this.posY, this.width, this.height);
+      this.ctx.drawImage(	
+      this.image,
+      this.posX,
+      this.posY,
+      this.width,
+      this.height
+      )
     }
   
     move() {
