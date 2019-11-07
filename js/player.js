@@ -10,9 +10,10 @@ class Player {
         this.posX = 50;
         this.posY = gameHeight * 0.94 - this.height;
         this.posY0 = gameHeight * 0.94 - this.height;
-        this.vy = 50;
+        this.vy = 30;
         this.gravity = .2;
         this.gameWidth = gameWidth;
+        this.canShoot = true;
 
         this.frames = 10;
         this.framesIndex = 0;
@@ -58,10 +59,11 @@ class Player {
         
             this.posY += this.speed
 
-          }if(this.keyState.keySpace){
-            this.shoot();
-            
           }
+         //if(this.keyState.keySpace){
+         //  this.shoot();
+         //  
+         //}
                   this.bullets.forEach(bullet => bullet.move())
 
     }
@@ -85,7 +87,7 @@ class Player {
                 this.keyState.keyDown = true;
             }
             if(e.keyCode === 32){
-                this.keyState.keySpace = true;
+                this.shoot();
             }
           })
           document.addEventListener('keyup', (e) => {
@@ -96,14 +98,18 @@ class Player {
             if (e.keyCode === 40) {
                 this.keyState.keyDown = false;
             }
-            if(e.keyCode === 32){
-                this.keyState.keySpace = false;
-            }
           })
         }
 
     shoot() {
-        this.bullets.push(new Bullet(this.ctx, 10, this.posX, this.posY, this.width, this.height, this.posY0))
+        if (this.canShoot) {
+            this.bullets.push(new Bullet(this.ctx, 10, this.posX, this.posY, this.width, this.height, this.posY0))
+            this.canShoot = false;
+            setTimeout(()=>{
+                this.canShoot=true;
+            },1000)
+        }
+       
     }
 
     clearBullets() {

@@ -6,19 +6,20 @@ class Bullet {
       this.posX = playerX + playerWidth;
       this.posY = playerY + playerHeight/2;
       this.playerHeight= playerHeight;
+      this.playerWidth=playerWidth;
       this.floor = floor;
+      this.image = new Image();
+      this.image.src = './img/Beer.png'
   
-      this.vx = 15;
-      this.vy = 9;
+      this.vx = 10;
+      this.vy = 4;
       this.gravity = 0.9;
     }
   
     draw() {
-      this.ctx.beginPath();
-      this.ctx.fillStyle = '#FFB832'
-      this.ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2)
-      this.ctx.fill()
-      this.ctx.closePath();
+
+      this.ctx.drawImage(this.image, this.posX, this.posY, 40, 40)
+
     }
   
     move() {

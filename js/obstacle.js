@@ -17,27 +17,27 @@ class Obstacle {
     draw(framesCounter) {
       this.ctx.drawImage(	
       this.image,
-      (this.image.width/this.frames)*this.framesIndex,
-      0,
-      this.image.width/this.frames,
-      this.image.height,
+    //  (this.image.width/this.frames)*this.framesIndex,
+    // 0,
+    //  this.image.width/this.frames,
+    //  this.image.height,
       this.posX,
       this.posY,
       this.width,
       this.height,
       )
-      this.animate(framesCounter)
+      //this.animate(framesCounter)
     }
   
     move() {
       this.posX -= this.vx;
     }
 
-    animate(framesCounter) {
-      if(framesCounter % 10 === 0) {
-        this.framesIndex++;
-  
-        if(this.framesIndex > this.frames-1) this.framesIndex = 0;
-      }
-    }
+//   animate(framesCounter) {
+//     if(framesCounter % 10 === 0) {
+//       this.framesIndex++;
+// 
+//       if(this.framesIndex > this.frames-1) this.framesIndex = 0;
+//     }
+//   }
   }

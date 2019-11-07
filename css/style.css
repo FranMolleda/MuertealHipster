@@ -1,4 +1,49 @@
 html, body {
     margin: 0;
     padding: 0;
+    background-image: url('../img/woodTable.png');
+  }
+
+  #tittle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 100px;
+    font-style: italic;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+
+  #parraf{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(28, 20, 16);
+    font-size: 100px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+  }
+
+  #image> img{
+    display: flex;
+    width: 300px;
+    height: 300px;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  #image{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #buttons>button{
+    display: flex;
+    padding: 50px ,100px;
+    height: 50px;
+    width: 100px;
+    border-radius: 5px;
+    text-align: center;
+    
   }
