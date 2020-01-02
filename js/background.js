@@ -5,7 +5,7 @@ class Background {
         this.height = height;
 
         this.image = new Image();
-        this.image.src = './img/woodTable.png';//fondo de ladrillos
+        this.image.src = './img/fondoCuadrados.jpg';//fondo de ladrillos
 
         this.posX = 0;
         this.posY = 0;
@@ -21,9 +21,9 @@ class Background {
     }
 
     move() {
-        //this.posY += this.vx
+        this.posY += this.vx
 
-        //if(this.posY >=  this.height) this.posY = 0;
+        if(this.posY >=  this.height) this.posY = 0;
        //this.posX -= this.vx;
 
        //if(this.posX <= -this.width) this.posX = 0;

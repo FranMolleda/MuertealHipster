@@ -5,7 +5,7 @@ class Victim{
         this.height = height;
 
         this.image = new Image();
-        this.image.src = './img/gafotas.png'
+        this.image.src = './img/zombie_walk.png'
 
         this.posX = posX;
         this.posY = posY;

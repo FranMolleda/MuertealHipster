@@ -11,8 +11,8 @@ class Bullet {
       this.image = new Image();
       this.image.src = './img/Beer.png'
   
-      this.vx = 10;
-      this.vy = 4;
+      this.vx = 5;
+      this.vy = 7;
       this.gravity = 0.9;
     }
   

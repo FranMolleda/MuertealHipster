@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Game Project</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="init">
+      <h1 id="tittle">Are you ready?!</h1>
+      <p id="parraf">Don't try to understand... just enjoy it!</p>
+      <div id="buttons">
+        <button id="green" href="index.html">Start</button>
+      </div>
+      <div id="image">
+        <img src="./img/zombie_volador.png" alt="Hipster" />
+        <img id="globo" src="./img/Beer.png" alt="Beer" />
+        <img src="./img/zombie_globo.png" alt="Gafotas" />
+        <img src="./img/zombie_walk.png" alt="Llama" />
+      </div>
+    </div>
 
-<canvas id="canvas"></canvas>
-<script src="js/scoreboard.js"></script>
-<script src="js/brick.js"></script>
-<script src="js/bullet.js"></script>
-<script src="js/victims.js"></script>
-<script src="js/obstacle.js" ></script>
-<script src="js/player.js"></script>
-<script src="js/background2.js"></script>
-<script src="js/background.js"></script>
-<script src="js/game.js"></script>
-<script src="js/index.js"></script> 
-</body>
+    <canvas id="canvas"></canvas>
+    <div class="🍺">
+      <img class = 'over' src="./img/gameOver.jpg" alt="gameOver" />
+      <a href="index.html">
+      <button class="reset" href='index.html'>TRY AGAIN</button>
+      </a>
+    </div>
+
+    <script src="js/scoreboard.js"></script>
+    <script src="js/brick.js"></script>
+    <script src="js/bullet.js"></script>
+    <script src="js/victims.js"></script>
+    <script src="js/obstacle.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/background.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>

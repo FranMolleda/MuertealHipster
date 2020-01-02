@@ -13,7 +13,7 @@ const Game = {
         SPACE_KEY: 32
     },
     score: 0,
-    numberOfBricks: 5,
+    numberOfBricks: 2,
     randomX: 0,
     randomH: 0,
     maxBricksY: 0,
@@ -46,7 +46,6 @@ const Game = {
             if(this.framesCounter % 100 === 0) this.score++;
             if(this.isCollision()) this.gameOver()
             this.bulletCollision()
-            // if(this.bulletCollision()) this.gameOver()
             if(this.framesCounter > 1000) this.framesCounter = 0;
         }, 1000 / this.fps)
     },
@@ -55,9 +54,8 @@ const Game = {
 
     reset: function () {
         this.background = new Background(this.ctx, this.width, this.height);
-        this.background2 = new Background2(this.ctx, this.width, this.height);
         this.bricks = [];
-        this.player = new Player(this.ctx, 80, 200, './img/elevator_withfulano.png', this.width, this.height, this.playerKeys);
+        this.player = new Player(this.ctx, 100, 200, './img/zombie_globo.png', this.width, this.height, this.playerKeys);
         this.obstacles = [];
         this.victims = []
         ScoreBoard.init(this.ctx, this.score)
@@ -66,7 +64,6 @@ const Game = {
         this.maxBricksX = this.width - this.brickWidth
         this.minBricksX = this.width * 0.5 //Para que salgan de la mitad de la pantalla hacia final de la pantalla
         this.generateBricks();
-        //this.generateVictims()
     },
 
     clear: function () {
@@ -76,7 +73,6 @@ const Game = {
     drawAll: function () {
         // console.log(this.victims)
         this.background.draw();
-        this.background2.draw();
         this.player.draw(this.framesCounter);
         this.victims.forEach(victim => victim.draw());
         this.bricks.forEach(brick => brick.draw());
@@ -86,7 +82,6 @@ const Game = {
 
     moveAll: function () {
         this.background.move()
-        this.background2.move()
         this.player.move()
         this.obstacles.forEach(obstacle => obstacle.move())
     },
@@ -100,13 +95,13 @@ const Game = {
             this.heightY = Math.floor((Math.random()*450)+500) - (this.height/3)-100 +  spaceY * i
             
             this.bricks.push(new Brick(this.ctx, this.brickWidth, this.randomY, this.randomX-100, this.heightY))
-            this.victims.push(new Victim(this.ctx, this.brickWidth, this.randomY, this.randomX-150, this.heightY-146))
+            this.victims.push(new Victim(this.ctx, this.brickWidth, this.randomY, this.randomX-80, this.heightY-135))
 
         }
     },
 
     generateObstacles: function() {
-        this.obstacles.push(new Obstacle(this.ctx,'./img/llama_whitebg.png', 80, 80, this.width, this.height))
+        this.obstacles.push(new Obstacle(this.ctx,'./img/zombie_volador.png', 80, 80, this.width, this.height))
       },
 
  
@@ -114,19 +109,34 @@ const Game = {
 
     gameOver: function () {
         clearInterval(this.interval)
+        document.getElementsByClassName('🍺')[1].setAttribute('class','')
+        document.getElementById('canvas').setAttribute('class','🍺')
+        
     },
 
     isCollision: function () {
-        return this.obstacles.some(obs => (this.player.posX + this.player.width/2 > obs.posX && obs.posX + obs.width/2 > this.player.posX && this.player.posY + this.player.height/2 > obs.posY && obs.posY + obs.height/2 > this.player.posY ))
+        return this.obstacles.some(obs => (this.player.posX + this.player.width/2 > obs.posX && obs.posX + obs.width/3 > this.player.posX && this.player.posY + this.player.height-20 > obs.posY && obs.posY + obs.height/2 > this.player.posY ))
 
     },
 
     bulletCollision: function(){
         this.player.bullets.forEach((bullet, bIndex  ) => {//bucle donde tenemos los disparos de la pantalla
             this.victims.forEach((victim, vIndex) => {//bucle para recorrer las victimas
-                if(bullet.posX + bullet.playerWidth/3 > victim.posX && victim.posX + victim.width/2 > bullet.posX && bullet.posY + bullet.playerHeight/3 > victim.posY/3 && victim.posY/3 + victim.height > bullet.posY ) {
+                if(bullet.posX-60 + bullet.playerWidth > victim.posX && victim.posX + victim.width > bullet.posX-50 && bullet.posY + bullet.playerHeight > victim.posY && victim.posY + 150 > bullet.posY ) {
+                    console.log(victim.posY , victim.height , bullet.posY)
+                    debugger
                     this.player.bullets.splice(bIndex,1)
                     this.victims.splice(vIndex,1)
+                }if( this.victims.length===0){
+                    this.clear();
+                    this.bricks=[];
+                    this.numberOfBricks += 1;
+                    this.obstacles.forEach(obstacle=>{
+                        obstacle.vx+=2
+                    })
+                    this.generateBricks();
+                    
+
                 }
             })
         })
